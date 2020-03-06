@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyledMovieInfo } from '../styles/StyledMovieInfo';
 import NoImage from '../images/no_image.jpg';
 import { IMAGE_BASE_URL, POSTER_SIZE } from '../../config';
@@ -53,6 +54,10 @@ const MovieInfo = ({ movieInfo }) => {
             </div>
         </StyledMovieInfo>
     )
+}
+
+MovieInfo.propTypes = {
+    movieInfo: PropTypes.object
 }
 
 export default MovieInfo

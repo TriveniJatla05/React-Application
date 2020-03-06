@@ -74,19 +74,3 @@ const Home = () => {
 
 export default Home
 
-{/* <Grid header={searchTerm ? 'Search Result' : 'Popular Movies'}> */ }
-{/* <Grid header='Popular Movies'>
-{state.movies.map(movie => (
-    <MovieThumb
-        key={movie.id}
-        clickable
-        image={
-            movie.poster_path
-                ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
-                : NoImage
-        }
-        movieId={movie.id}
-        movieName={movie.original_title}
-    />
-))}
-</Grid> */}
