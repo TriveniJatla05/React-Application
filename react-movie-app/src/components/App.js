@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './elements/Header';
 import Home from './Home';
 import { GlobalStyle } from './styles/GlobalStyle';
@@ -9,8 +9,7 @@ import Movie from './Movie';
 import NotFound from './NotFound';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { element } from 'prop-types';
-// import { Router } from '@reach/router';
-//export const UserName = React.createContext();
+import RateMovie from './elements/RateMovie';
 
 function App() {
     return (
@@ -19,11 +18,12 @@ function App() {
             <AuthState>
                 <Router>
                     <Switch>
-                        <Route exact path="/register" component={Register} />
-                        <Route exact path="/" component={Login} />
-                        <Route exact path="/home" component={Home} />
-                        <Route exact path="/:movieId" component={Movie} />
-                        <Route component={NotFound} />
+                            <Route exact path="/register" component={Register} />
+                            <Route exact path="/" component={Login} />
+                            <Route exact path="/home" component={Home} />
+                            <Route exact path="/ratethismovie" component={RateMovie} />
+                            <Route exact path="/:movieId" component={Movie} />
+                            <Route component={NotFound} />
                     </Switch>
                 </Router>
             </AuthState>

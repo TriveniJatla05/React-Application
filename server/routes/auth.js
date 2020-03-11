@@ -33,6 +33,7 @@ router.post('/',
         console.log("Login password = "+password);
         try {
             let user = await User.findOne({ email });
+            
             if (!user) {
                 return res.status(400).json({ msg: 'Invalid Credentails' })
             }
@@ -42,19 +43,21 @@ router.post('/',
             if (!match) {
                 return res.status(400).json({ msg: 'Invalid Credentails' })
             }
-
+            //localStorage.setItem("UserName",user.name);
             //if both email and password matched will do payload jsonwebtoken etc...!
             const payload = {
                 user: {
-                    id: user.id
+                    id: user.id,
+                    userName: user.name
                 }
             }
-
+            console.log("server code = "+JSON.stringify(payload.user));
             jwt.sign(payload, process.env.SECRET, {
-                expiresIn: 3600
+                //expiresIn: 3600
+
             }, (err, token) => {
                 if (err) throw err
-                res.send({ token })
+                res.send({ token,user: payload.user })
             })
         } catch (error) {
             console.error(err.message)

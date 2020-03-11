@@ -29,14 +29,31 @@ export const StyledRMDBLogo = styled.img`
   }
 `;
 
-export const StyledTMDBLogo = styled.img`
+// export const StyledTMDBLogo = styled.img`
+//   width: 122px;
+//   margin-top: 25px;
+//   float: right;
+
+//   @media screen and (max-width: 500px) {
+//     display: inline-block;
+//     width: 80px;
+//     margin-top: 0px;
+//   }
+// `;
+
+export const StyledTMDBLogo = styled.div`
   width: 122px;
   margin-top: 25px;
+  margin-right: 35px;
   float: right;
-
-  @media screen and (max-width: 500px) {
-    display: inline-block;
-    width: 80px;
-    margin-top: 0px;
+  color: #FFFFFF;
+  display: flex;
+  
+  .userIcon{
+    font-size: 25px
   }
 `;
+
+
+
+

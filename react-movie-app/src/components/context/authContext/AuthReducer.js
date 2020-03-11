@@ -12,8 +12,9 @@ export default (state, action) => {
     switch (action.type) {
         case SUCCESS_LOGIN:
             console.log("Setting to local storage and making auth to true");
-            localStorage.setItem('token', action.payload.token)
-            //localStorage.setItem('email',email);
+            //localStorage.setItem('token', action.payload.token)
+            console.log(JSON.stringify(action.payload.user));
+            localStorage.setItem('user',JSON.stringify(action.payload.user));
             return {
                 ...state,
                 userAuth: true,

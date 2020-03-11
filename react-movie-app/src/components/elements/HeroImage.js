@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledHeroImage } from '../styles/StyledHeroImage';
+// import { useContext } from 'react';
+// import { UserContext } from '../Home';
 
 const HeroImage = ({ image, title, text }) => {
+//      const user = useContext(UserContext);
+// console.log("user name in HeroImage = "+user);
     return (
         <StyledHeroImage image={image}>
             <div className="heroimage-content">

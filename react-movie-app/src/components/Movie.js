@@ -9,6 +9,7 @@ import Navigation from './elements/Navigation';
 import Grid from './elements/Grid';
 import Spinner from './elements/Spinner';
 import useMovieFetch from './hooks/useMovieFetch';
+import RateThisMovieBtn from './elements/RateThisMovieBtn';
 
 const Movie = ({ match}) => {
     
@@ -32,7 +33,7 @@ const Movie = ({ match}) => {
                     ))
                 }
             </Grid>
-            
+            <RateThisMovieBtn text="Rate this Movie"/>
         </>
     )
 }
