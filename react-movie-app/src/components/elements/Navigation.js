@@ -10,7 +10,8 @@ const Navigation = ({ title }) => {
     useEffect(() =>{
         let user = JSON.parse(localStorage.getItem("user"));
         setUserName(user.userName);
-    })
+    },[])
+    //console.log("userName in navigation page = "+userName);
     return (
         <StyledNavigation>
             <div className="navigation-content">

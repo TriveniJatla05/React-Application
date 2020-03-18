@@ -21,7 +21,7 @@ function App() {
                             <Route exact path="/register" component={Register} />
                             <Route exact path="/" component={Login} />
                             <Route exact path="/home" component={Home} />
-                            <Route exact path="/ratethismovie" component={RateMovie} />
+                            {/* <Route exact path="/ratethismovie" component={RateMovie} /> */}
                             <Route exact path="/:movieId" component={Movie} />
                             <Route component={NotFound} />
                     </Switch>

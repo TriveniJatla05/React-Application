@@ -9,7 +9,7 @@ import { element } from 'prop-types';
 const MovieInfo = ({ movieInfo }) => {
     const directors = movieInfo.directors.map(director => director.name).join(', ')
     const producers = movieInfo.producers.map(producer => producer.name).join(', ')
-    console.log("producers = " +producers);
+    //console.log("producers = " +producers);
 
     return (
         <StyledMovieInfo backdrop={movieInfo.backdrop_path}>

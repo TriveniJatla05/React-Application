@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Navigation from './Navigation';
 
+
 const RateMovie = () => {
+    
     return (
         <div>
             <Navigation />
