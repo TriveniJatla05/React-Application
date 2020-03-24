@@ -28,7 +28,7 @@ const StarRating = forwardRef((props, ref ) => {
                             // onClick={ratingFunction}
                             />
                             <FaStar
-                                className="star"
+                                className="starImg"
                                 size={50}
                                 color={ratingValue <= (hover || rating) ? "#FF6347" : "#696969"}
                                 onMouseEnter={() => setHover(ratingValue)}

@@ -15,8 +15,12 @@ const userReview = new mongoose.Schema({
     review:{
         type: String,
         required: true
+    },
+    date:{
+        type:String,
+        required: true
     }
 })
 
-module.exports = mongoose.model('review',userReview)
+module.exports = mongoose.model('review',userReview);
 

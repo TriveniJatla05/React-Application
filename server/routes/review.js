@@ -7,16 +7,31 @@ const auth = require('../middleware/auth');
 //UserReview model
 const UserReview = require('../models/UserReview');
 
-router.post('/', function (req, res) {
+router.get('/:movieId', function (req, res) {
+    var movieId = req.params.movieId;
+    console.log("testing movieId ="+movieId);
+    UserReview.find({"movieId":parseInt(movieId)},function(err,docs){
+        if(err){
+            res.json(err);
+        } else {
+            console.log(docs);
+            //res.send({reviews:docs});
+            res.send(docs);
+        }
+        // if(err) res.json(err);
+        // else res.send({reviews:docs});
+    });
+})
 
+router.post('/', function (req, res) {
     const { movieRating } = req.body;
-    const { userName, movieId, rating, review } = movieRating;
-    console.log("movieRating object = " + JSON.stringify(movieRating));
+    const { userName, movieId, rating, review, date } = movieRating;
     userReview = new UserReview({
         userName,
         movieId,
         rating,
-        review
+        review,
+        date
     })
     userReview.save();
     res.send('user review successfull...!')

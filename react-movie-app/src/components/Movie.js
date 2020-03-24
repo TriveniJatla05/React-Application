@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/elements/Header';
 import { FaUserCircle } from 'react-icons/fa';
+import { FaStar } from 'react-icons/fa';
 import axios from 'axios';
 //components
 import Actor from './elements/Actor';
@@ -23,13 +24,24 @@ const Movie = ({ match }) => {
         let user = JSON.parse(localStorage.getItem("user"));
         setUserName(user.userName);
     });
-    //console.log("userName in movie page = " + userName);
+
+    const [reviewsArray, setReviewsArray] = useState([]);
+    console.log("reviewsArray =" + JSON.stringify(reviewsArray));
+    useEffect(() => {
+        console.log(match.params.movieId);
+        const movieId = match.params.movieId;
+        axios.get(`/review/${movieId}`)
+            .then((response) => {
+                console.log("reviews get data in movie component = " + JSON.stringify(response.data));
+                setReviewsArray(response.data);
+                //let reviewsArray = response.data;
+            })
+    }, [])
 
     const [rating, setRating] = useState(null);
     const ratingFunction = (ratingValue) => {
         setRating(ratingValue);
     }
-    //console.log("rating for a movie in Movie Component ="+rating);
 
     const [review, setReview] = useState('');
     const reviewChangeHandler = (event) => {
@@ -37,20 +49,18 @@ const Movie = ({ match }) => {
         // event.preventdefault();
     }
 
-    // console.log("userName = "+userName);
-    // console.log("rating = "+rating);
-    // console.log("review = "+review);
-    //console.log("review = "+JSON.stringify(review));
-   
     const postHandler = (e) => {
-        // console.log("review testing = " + review);
-        // console.log("rating testing =" + rating);
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var date = new Date();
+        var dateFormatting = months[date.getMonth()] + ' ' + date.getDate() + ',' + ' ' + date.getFullYear()
+        console.log("date = " + dateFormatting);
         let postData = {};
         const movieRating = {
             userName: userName,
             movieId: match.params.movieId,
             rating: rating,
-            review: review
+            review: review,
+            date: dateFormatting
         }
         postData['movieRating'] = movieRating;
         console.log("movieRating object = " + JSON.stringify(movieRating));
@@ -63,6 +73,12 @@ const Movie = ({ match }) => {
             .then((response) => {
                 setReview('');
                 starChildRef.current.resetRating(null);
+                axios.get(`/review/${match.params.movieId}`)
+                    .then((response) => {
+                        //console.log("reviews get data in movie component = " + JSON.stringify(response.data));
+                        setReviewsArray(response.data);
+                        //let reviewsArray = response.data;
+                    })
             }, (error) => {
                 console.log(error);
             });
@@ -87,55 +103,106 @@ const Movie = ({ match }) => {
                     ))
                 }
             </Grid>
+            <br />
+            <br />
+            {/* <hr className="hr" /> */}
 
-            <hr className="hr" />
-            
             <h4><b>ADD YOUR REVIEW HERE!</b></h4>
             <div class="container">
-                <div class="jumbotron">
+                {/* <div class="jumbotron"> */}
+                <div>
                     <form onSubmit={postHandler} id="movie-rating-form">
-                        <div class="row">
-                            <div class="col-md-4"></div>
+                        <div class="textWrap">
+                            <div class="row">
+                                <div class="col-md-2"></div>
 
+                                <div class="col-md-4">
+                                    <div className="userIcon">
+                                        <FaUserCircle />
+                                    </div>
+                                    <div>
+                                        <p><b>{userName}</b></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div className="rate">
+                                        <p><b>Score</b></p>
+                                    </div>
+                                    <div>
+                                        <StarRating ref={starChildRef} ratingFunction={ratingFunction} />
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2"></div>
+
+                                <div class="col-md-8">
+                                    <textarea
+                                        className="textarea"
+                                        rows="3"
+                                        cols="60"
+                                        placeholder="Type your review here...!"
+                                        value={review}
+                                        onChange={reviewChangeHandler}
+                                    >
+                                    </textarea>
+                                </div>
+
+                                <div class="col-md-2"></div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary black-background white" id="button"><b>Post</b></button>
+                                </div>
+
+                                <div class="col-md-3"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr className="hr" />
+            <h4><b>REVIEWS</b></h4>
+            <div>
+                {
+                    reviewsArray.map(review => (
+                        <div class="row" key={review.id}>
+                            <div class="col-md-2"></div>
                             <div class="col-md-2">
                                 <div className="userIcon">
                                     <FaUserCircle />
                                 </div>
                                 <div>
-                                    <h6><b>{userName}</b></h6>
+                                    <p><b>{review.userName}</b></p>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <h6 class="rate"><b>Score</b></h6>
-                                <StarRating  ref={starChildRef}  ratingFunction={ratingFunction}/>
+                            <div class="col-md-1">
+                                <div className="star">
+                                    <FaStar size={50} />
+                                </div>
+                                <div>
+                                    <p><b>{review.rating}</b></p>
+                                </div>
                             </div>
-                            <div class="col-md-2"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-7">
-                                <textarea
-                                    className="textarea"
-                                    rows="3"
-                                    cols="60"
-                                    placeholder="Type your review here...!"
-                                    value={review}
-                                    onChange={reviewChangeHandler}
-                                >
-                                </textarea>
-                            </div>
-                            <div class="col-md-2"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4"></div>
                             <div class="col-md-5">
-                                <button type="submit" class="btn btn-primary black-background white"><b>Post</b></button>
+                                <div className="date"><h6><b>{review.date}</b></h6></div>
+                                <div><p><b>{review.review}</b></p></div>
+                                {/* <div className="date"><h5><b>{review.date}</b></h5></div>
+                                <div><h5><b>{review.review}</b></h5></div>  */}
                             </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-2"></div>
                         </div>
-                    </form>
-                </div>
+
+                    ))
+                }
             </div>
+
         </>
     )
 }

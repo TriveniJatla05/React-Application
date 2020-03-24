@@ -1,7 +1,7 @@
-.star{
+.starImg{
     cursor: pointer;
     transition: color 200ms;
-    margin-top: 5px;
+    /* margin-top: 5px; */
 }
 h4{
     text-decoration: underline;
