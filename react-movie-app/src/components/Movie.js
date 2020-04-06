@@ -167,42 +167,46 @@ const Movie = ({ match }) => {
                     </form>
                 </div>
             </div>
-            <hr className="hr" />
-            <h4><b>REVIEWS</b></h4>
-            <div>
-                {
-                    reviewsArray.map(review => (
-                        <div class="row" key={review.id}>
-                            <div class="col-md-2"></div>
-                            <div class="col-md-2">
-                                <div className="userIcon">
-                                    <FaUserCircle />
-                                </div>
-                                <div>
-                                    <p><b>{review.userName}</b></p>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <div className="star">
-                                    <FaStar size={50} />
-                                </div>
-                                <div>
-                                    <p><b>{review.rating}</b></p>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div className="date"><h6><b>{review.date}</b></h6></div>
-                                <div><p><b>{review.review}</b></p></div>
-                                {/* <div className="date"><h5><b>{review.date}</b></h5></div>
-                                <div><h5><b>{review.review}</b></h5></div>  */}
-                            </div>
-                            <div class="col-md-2"></div>
+            {reviewsArray.length > 0 &&
+                (
+                    <>
+                        <hr className="hr" />
+                        <h4><b>REVIEWS</b></h4>
+                        <div>
+                            {
+                                reviewsArray.map((review) => {
+                                    let reviewNumber = review.rating;
+                                    let movieStar = [];
+                                    for (let i = 0; i < reviewNumber; i++) {
+                                        movieStar.push(<FaStar size={35} />)
+                                    }
+                                    return (<div class="row" key={review.id}>
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-2">
+                                            <div className="userIcon">
+                                                <FaUserCircle />
+                                            </div>
+                                            <div>
+                                                <p><b>{review.userName}</b></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div className="star reviewStar">
+                                                {movieStar}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div className="date reviewComment"><h6><b>{review.date}</b></h6></div>
+                                            <div className="reviewComment"><p><b>{review.review}</b></p></div>
+                                        </div>
+                                        {/* <div class="col-md-3"></div> */}
+                                    </div>)
+
+                                })
+                            }
                         </div>
-
-                    ))
-                }
-            </div>
-
+                    </>
+                )}
         </>
     )
 }

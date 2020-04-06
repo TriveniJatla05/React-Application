@@ -6,8 +6,6 @@ import './pages.css';
 const Login = (props) => {
     const { loginUser,userAuth,errors,clearError} = useContext(AuthContext);
     useEffect(() => {
-        // const email = localStorage.getItem('email');
-        // console.log("email = "+email);
         if(userAuth){
             props.history.push('/home');
         }
@@ -25,7 +23,6 @@ const Login = (props) => {
         e.preventDefault();
         loginUser({ email, password });
         clearError();
-        //localStorage.setItem('email',email);
     }
 
     return (

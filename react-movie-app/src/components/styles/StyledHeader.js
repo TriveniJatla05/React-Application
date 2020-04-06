@@ -5,6 +5,18 @@ export const StyledHeader = styled.div`
   padding: 0 20px;
   box-sizing: border-box;
 
+  .row{
+    float:right;
+    color: #ffffff;
+    
+  }
+  .userIcon{
+    font-size: 25px
+  }
+  p{
+    font-size: 15px;
+    margin-right: 15px;
+  }
   .header-content {
     max-width: 1280px;
     min-height: 120px;
@@ -43,17 +55,24 @@ export const StyledRMDBLogo = styled.img`
 
 export const StyledTMDBLogo = styled.div`
   width: 122px;
-  margin-top: 25px;
-  margin-right: 35px;
   float: right;
-  color: #FFFFFF;
-  display: flex;
-  
+  color: #ffffff;
+  display:flex;
+  margin-top: 25px;
   .userIcon{
     font-size: 25px
   }
-`;
+  
+  h2{
+    color: #ffffff;
+  }
+  `;
+  //margin-right: 35px;
+//display: flex;
+//color: #FFFFFF;
+//margin-top: 25px;
 
-
-
+// li{
+//   margin-top: 5px;
+// }
 

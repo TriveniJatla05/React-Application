@@ -27,24 +27,17 @@ router.post('/',
         if (!errors.isEmpty()) {
             return res.status(400).json({ error: errors.array() })
         }
-
         const { email, password } = req.body;
-        console.log("Login email = "+email);
-        console.log("Login password = "+password);
         try {
             let user = await User.findOne({ email });
-            
             if (!user) {
                 return res.status(400).json({ msg: 'Invalid Credentails' })
             }
-            //if user email is found in database we will check password
             const match = await bcrypt.compare(password, user.password)
             console.log("is password matched = "+match);
             if (!match) {
                 return res.status(400).json({ msg: 'Invalid Credentails' })
             }
-            //localStorage.setItem("UserName",user.name);
-            //if both email and password matched will do payload jsonwebtoken etc...!
             const payload = {
                 user: {
                     id: user.id,
@@ -71,3 +64,8 @@ module.exports = router;
         // router.get('/test', function (req, res) {
         //     res.send('get request successed...!');
         // })
+
+        // console.log("Login email = "+email);
+        // console.log("Login password = "+password);
+        //if user email is found in database we will check password
+        //if both email and password matched will do payload jsonwebtoken etc...!

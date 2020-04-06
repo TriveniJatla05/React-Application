@@ -33,7 +33,6 @@ const Register = (props) => {
             console.log("After register and before clear");
             clearError();
         }
-        //props.history.push('/login');
     }
     return (
         

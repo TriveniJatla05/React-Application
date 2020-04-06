@@ -1,15 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { API_URL, API_KEY } from '../../config';
 import axios from 'axios';
-
 export const useMovieFetch = (movieId) => {
-    
     const [movieInfo, setMovieInfo] = useState({});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-
     const fetchData = useCallback(async () => {
-        
         setError(false);
         setLoading(true);
         const endpoint = `${API_URL}movie/${movieId}?api_key=${API_KEY}`;
@@ -19,8 +15,6 @@ export const useMovieFetch = (movieId) => {
             axios.get(creditsEndpoint)
         ])
             .then(axios.spread((endpointResult, creditsEndpointResult) => {
-                //console.log("endpointResult = "+JSON.stringify(endpointResult));
-                //console.log("creditsEndpointResult = " +JSON.stringify(creditsEndpointResult));
                 const directors = creditsEndpointResult.data.crew.filter(
                     member => member.job === 'Director'
                 )
@@ -29,13 +23,11 @@ export const useMovieFetch = (movieId) => {
                 )
                 setMovieInfo({
                     ...endpointResult.data,
-                     //movie:endpointResult.data,
                     actors: creditsEndpointResult.data.cast,
                     directors: directors,
                     producers: producers
                 })
             }));
-            
         setLoading(false);
 
     }, [movieId])
