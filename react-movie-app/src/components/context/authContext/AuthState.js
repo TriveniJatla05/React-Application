@@ -8,14 +8,15 @@ import {
     FAIL_REGISTER,
     FAIL_LOGIN,
     SET_ERROR,
-    CLEAR_ERROR
+    CLEAR_ERROR,
+    SIGNOUT
 } from '../types';
 
 const AuthState = (props) => {
     const initialState = {
-        userAuth: null,
+        userAuth: false,
         errors: null,
-        userRegistered: null
+        userRegistered: false
     }
     const [state, dispatch] = useReducer(AuthReducer, initialState);
 
@@ -77,6 +78,12 @@ const AuthState = (props) => {
         })
     }
 
+    const signOut = () => {
+        dispatch({
+            type: SIGNOUT
+        })
+    }
+
     return (
         <AuthContext.Provider value={{
             userAuth: state.userAuth,
@@ -85,7 +92,8 @@ const AuthState = (props) => {
             registerUser,
             loginUser,
             setError,
-            clearError
+            clearError,
+            signOut
         }}>{props.children}</AuthContext.Provider>
     )
 }

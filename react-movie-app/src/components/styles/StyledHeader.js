@@ -11,11 +11,37 @@ export const StyledHeader = styled.div`
     
   }
   .userIcon{
-    font-size: 25px
+    font-size: 25px;
+  }
+  .dropdown{
+    float: right;
+    margin-right: 20px;
+  }
+  button{
+    border-radius: 50px;
+    background-color: #000000;
+  }
+  button:hover{
+    background-color: #ffffff;
+  }
+  .dropdown-menu{
+    background-color: #ffffff;
+    min-width: 7px;
+  }
+  a{
+    color: #000000;
+    text-align: center;
   }
   p{
     font-size: 15px;
     margin-right: 15px;
+  }
+  .userName{
+    color: #ffffff;
+    font-family: 'Abel',sans-serif;
+  }
+  h5{
+    color: #fffff;
   }
   .header-content {
     max-width: 1280px;

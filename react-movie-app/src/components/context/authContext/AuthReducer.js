@@ -4,7 +4,8 @@ import {
     FAIL_REGISTER,
     FAIL_LOGIN,
     SET_ERROR,
-    CLEAR_ERROR
+    CLEAR_ERROR,
+    SIGNOUT
 } from '../types';
 
 //reducer function
@@ -42,6 +43,12 @@ export default (state, action) => {
         case CLEAR_ERROR:
             return {
                 ...state,
+                errors: null
+            }
+        case SIGNOUT:
+            return{
+                ...state,
+                userAuth:false,
                 errors: null
             }
         default:

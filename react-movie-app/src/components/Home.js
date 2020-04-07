@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import {
     API_URL,
     API_KEY,
@@ -18,16 +18,20 @@ import LoadMoreBtn from './elements/LoadMoreBtn'
 
 //importing custom hook
 import useHomeFetch from './hooks/useHomeFetch';
-
 import NoImage from './images/no_image.jpg';
+import AuthContext from './context/authContext/AuthContext';
 
-const Home = () => {
+const Home = (props) => {
     const [{ state, loading, error }, fetchMovies] = useHomeFetch();
     //console.log(JSON.stringify(state));
     const [searchTerm, setSearchTerm] = useState('');
      const [userName, setUserName] = useState('');
-
+     const { userAuth } = useContext(AuthContext);
     useEffect(() => {
+        console.log("userAuth in Home ..."+userAuth);
+        if(!userAuth){
+            props.history.push("/");
+        }
         let user = JSON.parse(localStorage.getItem("user"));
         setUserName(user.userName);
     }, []);
@@ -49,7 +53,7 @@ const Home = () => {
 
     return (
         <React.Fragment>
-                <Header userName={userName} />
+                <Header {...props} userName={userName} />
                 <HeroImage
                     image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.heroImage.backdrop_path}`}
                     title={state.heroImage.original_title}

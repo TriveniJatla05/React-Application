@@ -6,6 +6,7 @@ import './pages.css';
 const Login = (props) => {
     const { loginUser,userAuth,errors,clearError} = useContext(AuthContext);
     useEffect(() => {
+        console.log("User Auth in Login ..."+userAuth);
         if(userAuth){
             props.history.push('/home');
         }
