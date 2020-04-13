@@ -10,12 +10,14 @@ app.use('/register', require('./routes/register'));
 app.use('/auth',require('./routes/auth'));
 app.use('/review',require('./routes/review'));
 
+console.log("__dirname "+__dirname);
+console.log("process.env.NODE_ENV "+process.env.NODE_ENV);
 //step: 3
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static('react-movie-app/build'));
-
+if(process.env.NODE_ENV !== 'production'){
+    app.use(express.static('build'));
+    
     app.get('*',(req,res) => {
-        res.sendFile(path.join(__dirname,'react-movie-app','build','index.html'));
+        res.sendFile(path.join(__dirname,'build','index.html'));
     });
 }
 
