@@ -9,7 +9,7 @@ app.use(express.json({ extended: true }))
 app.use('/register', require('./routes/register'));
 app.use('/auth',require('./routes/auth'));
 app.use('/review',require('./routes/review'));
-console.log("__dirname "+__dirname);
+
 //step: 3
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('../react-movie-app/build'));
